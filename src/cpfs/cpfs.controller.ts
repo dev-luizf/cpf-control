@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import addCpfSchema from 'src/joi-schemas/cpf.schema';
+import { joiValidate } from 'src/utils/joiValidate';
 import { CpfsService } from './cpfs.service';
-import { CreateCpfDto } from './dto/create-cpf.dto';
-import { UpdateCpfDto } from './dto/update-cpf.dto';
+import { AddCpfDto } from './dto/create-cpf.dto';
 
-@Controller('cpfs')
+@Controller('cpf')
 export class CpfsController {
   constructor(private readonly cpfsService: CpfsService) {}
 
   @Post()
-  create(@Body() createCpfDto: CreateCpfDto) {
-    return this.cpfsService.create(createCpfDto);
+  create(@Body() addCpfDto: AddCpfDto) {
+    joiValidate(addCpfSchema, addCpfDto)
+    return this.cpfsService.add(addCpfDto);
   }
 
   @Get()
@@ -17,18 +19,13 @@ export class CpfsController {
     return this.cpfsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cpfsService.findOne(+id);
+  @Get(':cpf')
+  findOne(@Param('cpf') cpf: string) {
+    return this.cpfsService.findOne(cpf);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCpfDto: UpdateCpfDto) {
-    return this.cpfsService.update(+id, updateCpfDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cpfsService.remove(+id);
+  @Delete(':cpf')
+  remove(@Param('cpf') cpf: string) {
+    return this.cpfsService.remove(cpf);
   }
 }

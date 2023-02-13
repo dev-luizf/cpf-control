@@ -1,26 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCpfDto } from './dto/create-cpf.dto';
-import { UpdateCpfDto } from './dto/update-cpf.dto';
+import { AddCpfDto } from './dto/create-cpf.dto';
+import { prisma } from 'src/prisma';
+import apiException from 'src/utils/apiException';
 
 @Injectable()
 export class CpfsService {
-  create(createCpfDto: CreateCpfDto) {
-    return 'This action adds a new cpf';
+  async add(createCpfDto: AddCpfDto) {
+    const { cpf } = createCpfDto;
+    const cpfExists =  await prisma.cpf.findUnique({ where: { cpf } });
+    if (cpfExists) apiException('ConflictException', 'Cpf', 'CPF already exists.');
+    return prisma.cpf.create({ data: createCpfDto });
   }
 
-  findAll() {
-    return `This action returns all cpfs`;
+  async findAll() {
+    return prisma.cpf.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cpf`;
+  findOne(cpf: string) {
+    return `This action returns a #${cpf} cpf`;
   }
 
-  update(id: number, updateCpfDto: UpdateCpfDto) {
-    return `This action updates a #${id} cpf`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} cpf`;
+  remove(cpf: string) {
+    return `This action removes a #${cpf} cpf`;
   }
 }

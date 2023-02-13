@@ -1,1 +1,3 @@
-export class CreateCpfDto {}
+export class AddCpfDto {
+    cpf: string;
+}
