@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import addCpfSchema from 'src/joi-schemas/cpf.schema';
+import cpfSchema from 'src/joi-schemas/cpf.schema';
 import { joiValidate } from 'src/utils/joiValidate';
 import { CpfsService } from './cpfs.service';
 import { AddCpfDto } from './dto/create-cpf.dto';
@@ -12,7 +12,7 @@ export class CpfsController {
 
   @Post()
   create(@Body() addCpfDto: AddCpfDto) {
-    joiValidate(addCpfSchema, addCpfDto)
+    joiValidate(cpfSchema, addCpfDto);
     return this.cpfsService.add(addCpfDto);
   }
 
@@ -23,11 +23,13 @@ export class CpfsController {
 
   @Get(':cpf')
   findOne(@Param('cpf') cpf: string) {
+    joiValidate(cpfSchema, { cpf });
     return this.cpfsService.findOne(cpf);
   }
 
   @Delete(':cpf')
   remove(@Param('cpf') cpf: string) {
+    joiValidate(cpfSchema, { cpf });
     return this.cpfsService.remove(cpf);
   }
 }

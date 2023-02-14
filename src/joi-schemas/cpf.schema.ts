@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import useful from 'useful-simple-functions';
 
-const addCpfSchema = Joi.object({
+const cpfSchema = Joi.object({
   cpf: Joi.string()
     .required()
     .min(11)
@@ -13,4 +13,4 @@ const addCpfSchema = Joi.object({
     }),
 });
 
-export default addCpfSchema;
+export default cpfSchema;
