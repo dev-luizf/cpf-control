@@ -8,7 +8,7 @@ const cpfSchema = Joi.object({
     .max(11)
     .custom((value: string, helpers) => {
       if (!useful.isCpfCnpj(value)) {
-        return helpers.message({ custom: "CPF is not valid." });
+        return helpers.message({ custom: 'CPF is not valid.' });
       }
     }),
 });

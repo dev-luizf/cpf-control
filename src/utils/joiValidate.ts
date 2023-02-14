@@ -6,10 +6,10 @@ export const joiValidate = (
   payload: any,
 ) => {
   const { error } = schema.validate(payload);
-  
-  if (error) {    
+
+  if (error) {
     const { key } = error.details[0].context;
-    let exceptionKey = key[0].toUpperCase() + key.slice(1);
+    const exceptionKey = key[0].toUpperCase() + key.slice(1);
     throw new BadRequestException({
       type: `Invalid${exceptionKey}Exception`,
       message: error.message,

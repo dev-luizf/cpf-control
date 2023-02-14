@@ -1,3 +1,3 @@
 export class AddCpfDto {
-    cpf: string;
+  cpf: string;
 }

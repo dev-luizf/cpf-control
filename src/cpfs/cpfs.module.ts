@@ -4,6 +4,6 @@ import { CpfsController } from './cpfs.controller';
 
 @Module({
   controllers: [CpfsController],
-  providers: [CpfsService]
+  providers: [CpfsService],
 })
 export class CpfsModule {}
