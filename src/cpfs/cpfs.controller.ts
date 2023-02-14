@@ -3,7 +3,9 @@ import addCpfSchema from 'src/joi-schemas/cpf.schema';
 import { joiValidate } from 'src/utils/joiValidate';
 import { CpfsService } from './cpfs.service';
 import { AddCpfDto } from './dto/create-cpf.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('CPF')
 @Controller('cpf')
 export class CpfsController {
   constructor(private readonly cpfsService: CpfsService) {}
