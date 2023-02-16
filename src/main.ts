@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { PrismaService } from './prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const PORT = parseInt(process.env.PORT) || 3001;
   app.enableCors();
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app)
 
   const config = new DocumentBuilder()
     .setTitle('CPF Control API')
