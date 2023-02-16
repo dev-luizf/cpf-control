@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('CPF Control API')
-    .setDescription('An api that control a blacklist of CPFs.')
+    .setDescription('Uma API para controle de uma lista restrita de CPFs utilizando nest.js, prisma, joi, swagger, jest e docker.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

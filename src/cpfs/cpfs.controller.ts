@@ -66,6 +66,14 @@ export class CpfsController {
   @ApiOperation({
     description: 'Verifica se um determinado CPF está na lista restrita.',
   })
+  @ApiParam({
+    name: 'cpf',
+    examples: {
+      'Formato válido': {
+        value: '12345678901',
+      },
+    },
+  })
   @ApiOkResponse({
     description: 'Um CPF específico.',
     schema: {
