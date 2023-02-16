@@ -4,7 +4,7 @@ FROM node:14-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-COPY prisma ./prisma/
+COPY database ./database/
  
 RUN npm install
 
@@ -17,7 +17,7 @@ FROM node:14-alpine
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/database ./database
  
 USER node
 
