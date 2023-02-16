@@ -21,7 +21,7 @@ const conflictError = {
   type: 'ExistsCpfException',
   message: 'CPF already exists.',
 };
-const notFounError = {
+const notFoundError = {
   type: 'NotFoundCpfException',
   message: 'CPF not found.',
 };
@@ -93,7 +93,7 @@ describe('CpfsService', () => {
         await cpfsService.findOne(cpf);
       } catch (error) {
         expect(error).toBeInstanceOf(NotFoundException);
-        expect(error.response).toEqual(notFounError);
+        expect(error.response).toEqual(notFoundError);
       }
     });
   });
@@ -110,7 +110,7 @@ describe('CpfsService', () => {
         await cpfsService.remove(cpf);
       } catch (error) {
         expect(error).toBeInstanceOf(NotFoundException);
-        expect(error.response).toEqual(notFounError);
+        expect(error.response).toEqual(notFoundError);
       }
     });
   });
