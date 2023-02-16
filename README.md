@@ -68,7 +68,7 @@ Exemplo: `DATABASE_URL="postgresql://luiz:123456@localhost:5432/cpf-control?sche
 
 6. Inicie o servidor:
 
-`npm run start`
+`npm run dev`
 
 7. Acesse a API em `http://localhost:3001`.
 
@@ -88,7 +88,7 @@ A API permite as seguintes operações:
 -   Buscar um CPF específico na lista
 -   Remover um CPF da lista.
 
-A documentação do projeto foi feita com Swagger e pode ser acessada em [http://localhost:3001/api](http://localhost:3000/api).
+A documentação do projeto foi feita com Swagger e pode ser acessada em [http://localhost:3001/api](http://localhost:3001/api).
 
 ## Estrutura do projeto
 
