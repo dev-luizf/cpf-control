@@ -2,7 +2,6 @@ import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CpfsController } from './cpfs.controller';
 import { CpfsService } from './cpfs.service';
-import { AddCpfDto } from './dto/create-cpf.dto';
 
 const cpfs = [
   {
@@ -18,7 +17,10 @@ const cpfs = [
 ];
 
 const newCpf = { cpf: '35139532085' };
-const expectedError = { type: 'InvalidCpfException', message: 'CPF is not valid.' };
+const expectedError = {
+  type: 'InvalidCpfException',
+  message: 'CPF is not valid.',
+};
 
 describe('CpfsController', () => {
   let controller: CpfsController;
@@ -32,12 +34,12 @@ describe('CpfsController', () => {
           provide: CpfsService,
           useValue: {
             findAll: jest.fn().mockResolvedValue(cpfs),
-            findOne: jest.fn().mockImplementation((cpf: string) =>
-              Promise.resolve(cpfs[0]),
-            ),
+            findOne: jest
+              .fn()
+              .mockImplementation(() => Promise.resolve(cpfs[0])),
             add: jest
               .fn()
-              .mockImplementation((cpf: AddCpfDto) =>
+              .mockImplementation(() =>
                 Promise.resolve({ cpf: '11111111111' }),
               ),
             remove: jest.fn().mockResolvedValue({}),

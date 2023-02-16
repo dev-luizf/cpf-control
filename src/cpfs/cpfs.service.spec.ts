@@ -1,7 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { CpfsService } from './cpfs.service';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AddCpfDto } from './dto/create-cpf.dto';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 
 const cpfsList = [
@@ -18,8 +17,14 @@ const cpfsList = [
 ];
 const cpf = '11111111111';
 const newCpf = { cpf };
-const conflictError = { type: 'ExistsCpfException', message: 'CPF already exists.' };
-const notFounError = { type: 'NotFoundCpfException', message: 'CPF not found.' };
+const conflictError = {
+  type: 'ExistsCpfException',
+  message: 'CPF already exists.',
+};
+const notFounError = {
+  type: 'NotFoundCpfException',
+  message: 'CPF not found.',
+};
 
 describe('CpfsService', () => {
   let cpfsService: CpfsService;
@@ -28,22 +33,20 @@ describe('CpfsService', () => {
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
-        CpfsService, 
+        CpfsService,
         {
           provide: PrismaService,
           useValue: {
             cpf: {
               findMany: jest.fn().mockResolvedValue(cpfsList),
-              findUnique: jest.fn().mockImplementation((cpf: string) =>
-                Promise.resolve(cpfsList[0]),
-              ),
+              findUnique: jest
+                .fn()
+                .mockImplementation(() => Promise.resolve(cpfsList[0])),
               create: jest
                 .fn()
-                .mockImplementation((cpf: AddCpfDto) =>
-                  Promise.resolve(cpfsList[0]),
-                ),
+                .mockImplementation(() => Promise.resolve(cpfsList[0])),
               delete: jest.fn().mockResolvedValue({}),
-            }
+            },
           },
         },
       ],

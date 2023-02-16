@@ -8,7 +8,7 @@ async function bootstrap() {
   const PORT = parseInt(process.env.PORT) || 3001;
   app.enableCors();
   const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app)
+  await prismaService.enableShutdownHooks(app);
 
   const config = new DocumentBuilder()
     .setTitle('CPF Control API')
