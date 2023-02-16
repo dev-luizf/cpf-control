@@ -21,7 +21,6 @@ export class CpfsController {
   @ApiCreatedResponse({
     description: 'CPF cadastrado com sucesso.',
     schema: {
-      type: 'string',
       example: {
         cpf: '12345678901',
         createdAt: '2021-03-01T00:00:00.000Z',
